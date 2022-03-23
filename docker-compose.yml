@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+  solr:
+    image: solr:8.11.1
+    container_name: solr
+    ports:
+      - 8983:8983

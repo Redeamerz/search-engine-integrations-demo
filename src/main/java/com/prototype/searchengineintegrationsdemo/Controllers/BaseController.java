@@ -38,7 +38,7 @@ public class BaseController {
 
     @GetMapping("/getname")
     public ResponseEntity<Page<Article>> GetName(@RequestBody Map<String, String> json){
-        Page<Article> articleByAuthorsName = articleRepository.findByTitle(json.get("str1"), PageRequest.of(0,10).first());
+        Page<Article> articleByAuthorsName = articleRepository.findByAuthorsName(json.get("name"), PageRequest.of(0,10).first());
         return ResponseEntity.ok(articleByAuthorsName);
     }
 

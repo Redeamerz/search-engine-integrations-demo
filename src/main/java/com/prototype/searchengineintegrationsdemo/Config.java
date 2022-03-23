@@ -1,5 +1,6 @@
 package com.prototype.searchengineintegrationsdemo;
 
+import com.prototype.searchengineintegrationsdemo.Models.Article;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
@@ -13,12 +14,13 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "com.prototype.searchengineintegrationsdemo.Interfaces")
-@ComponentScan(basePackages = { "com.prototype.searchengineintegrationsdemo" })
+@ComponentScan(basePackages = { "com.prototype.searchengineintegrationsdemo.Models" })
 public class Config {
 
     @Bean
     public RestHighLevelClient client() {
-        ClientConfiguration clientConfiguration = ClientConfiguration.builder()
+        ClientConfiguration clientConfiguration =
+                ClientConfiguration.builder()
                 .connectedTo("localhost:9200")
                 .build();
 
@@ -27,6 +29,7 @@ public class Config {
 
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() {
-        return new ElasticsearchRestTemplate(client());
+        ElasticsearchRestTemplate elasticsearchRestTemplate = new ElasticsearchRestTemplate(client());
+        return elasticsearchRestTemplate;
     }
 }
